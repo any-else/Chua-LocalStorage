@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài Tập 01</title>
+</head>
+
+<body>
+
+  <input type="text" name="username" class="user" placeholder="Nhập tên người dùng">
+  <button id="addUser"> Thêm </button>
+  <button id="deleteUser">Xóa </button>
+  <p> Người dùng tên: <span class="span-name"> </span></p>
+</body>
+
+<script>
+  const btnAddElement = document.querySelector('#addUser');
+  const spanNameElement = document.querySelector('.span-name');
+  const inputElement = document.querySelector('.user')
+  const btnRemoveElement = document.querySelector('#deleteUser')
+  function addUser() {
+    if (!btnAddElement) return;
+
+    btnAddElement.addEventListener('click', () => {
+      //buoc thu 1 => lay value input luu vao localStorage
+      localStorage.setItem('userName', inputElement.value)
+      //bước thứ 2 => set value cho span đang để trống
+      spanNameElement.innerText = inputElement.value
+
+      //bước thứ 3 kiểm localStorage
+      let isCheck = localStorage.getItem('userName')
+
+      if (isCheck) {
+        btnAddElement.innerText = "Sửa"
+      } else {
+        console.log("false")
+      }
+      inputElement.value = ""
+
+    })
+
+  }
+  addUser()
+  function deleteUser() {
+    btnRemoveElement.addEventListener("click", () => {
+      //Thông tin người dùng bị mất 
+      spanNameElement.innerText = ""
+      localStorage.removeItem("userName")
+      btnAddElement.innerText = "Thêm"
+    })
+  }
+
+  deleteUser()
+</script>
+
+</html>

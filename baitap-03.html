@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập 3</title>
+  <style>
+    form {
+      border: 1px solid grey;
+      margin: 0 auto;
+      text-align: center;
+      width: 400px;
+    }
+
+    input {
+      width: 80%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="loginForm">
+    <input type="email" name="email" id="email" placeholder="Nhập vào email" /> <br>
+    <input type="password" name="password" id="password" placeholder="Nhập vào password" /> <br>
+    <button type="submit" id="btn"> Login User</button>
+  </form>
+
+  <script>
+    const formElement = document.querySelector('#loginForm')
+    formElement.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(formElement)
+      const userLogin = {
+        email: formData.get('email'),
+        password: formData.get('password')
+      }
+
+      sessionStorage.setItem('userLogin', JSON.stringify(userLogin))
+      formElement.reset()
+    })
+  </script>
+</body>
+
+</html>

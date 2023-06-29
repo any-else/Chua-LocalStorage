@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài Tập 02 Register Form</title>
+  <style>
+    form {
+      border: 1px solid grey;
+      margin: 0 auto;
+      text-align: center;
+      width: 400px;
+    }
+
+    input {
+      width: 80%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="registerForm">
+    <input type="text" name="username" id="username" placeholder="Nhập vào là tên"> <br>
+    <input type="email" name="email" id="email" placeholder="Nhập vào email" /> <br>
+    <input type="password" name="password" id="password" placeholder="Nhập vào password" /> <br>
+    <input type="password" name="resetpassword" id="resetpassword" placeholder="Nhập vào resetpassword" /> <br>
+    <button type="submit" id="btn"> Register User</button>
+  </form>
+</body>
+<script>
+  let listUserRegister = []
+  const btnElement = document.querySelector('#btn')
+  //cách 1: 
+  // function saveUser() {
+  //   btnElement.addEventListener('click', (event) => {
+  //     event.preventDefault()
+
+  //     const inputName = document.querySelector('#username')
+  //     const inputEmail = document.querySelector('#email')
+  //     const inputPassword = document.querySelector('#password')
+  //     const inputResetPassword = document.querySelector('#resetpassword')
+
+  //     const newUser = {
+  //       userName: inputName.value,
+  //       email: inputEmail.value,
+  //       password: inputPassword.value,
+  //       resetpassword: inputResetPassword.value
+  //     }
+
+  //     localStorage.setItem('userInfo', JSON.stringify(newUser))
+
+  //     inputName.value = ""
+  //     inputEmail.value = ""
+  //     inputPassword.value = ""
+  //     inputResetPassword.value = ""
+
+  //   })
+  // }
+  // saveUser()
+
+  //Cách 2 
+  const formElement = document.querySelector('#registerForm')
+
+  formElement.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(formElement)
+    const newUser = {
+      username: formData.get('username'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+      resetpassword: formData.get('resetpassword')
+    }
+
+    listUserRegister.push(newUser)
+
+    localStorage.setItem('userInfo', JSON.stringify(listUserRegister))
+
+    formElement.reset()
+  })
+</script>
+
+</html>
